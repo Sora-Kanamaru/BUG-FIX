@@ -92,7 +92,7 @@ public class AdministratorController {
 		}
 
 		administratorService.insert(administrator);
-		return "administrator/login";
+		return "redirect:administrator/login";
 	}
 
 	/////////////////////////////////////////////////////
@@ -145,16 +145,16 @@ public class AdministratorController {
 			return "redirect:/employee/list";
 		}
 	}
-/**
- * 直接ログインします。
- * @return
- */
+
+	/**
+	 * 直接ログインします。
+	 * 
+	 * @return
+	 */
 	@GetMapping("/login")
 	public String toLoginPage() {
 		return "administrator/login";
 	}
-
-
 
 	/////////////////////////////////////////////////////
 	// ユースケース：ログアウトをする
