@@ -1,5 +1,7 @@
 package com.example.form;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
 /**
@@ -10,6 +12,7 @@ import jakarta.validation.constraints.Pattern;
  */
 public class UpdateEmployeeForm {
 	/** id */
+	
 	private String id;
 	/** 扶養人数 */
 	@Pattern(regexp = "^[0-9]+$", message = "扶養人数は数値で入力してください")
