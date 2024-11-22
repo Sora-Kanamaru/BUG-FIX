@@ -105,7 +105,7 @@ public class AdministratorController {
 	 */
 	@RequestMapping("/")
 	public String toLogin() {
-		return "employee/list";
+		return "administrator/login";
 	}
 
 	/**
@@ -142,19 +142,19 @@ public class AdministratorController {
 
 			redirectAttributes.addFlashAttribute("administrator", administrator2);
 
-			return "redirect:/employee/list";
+			return "redirect:/employ/showList";
 		}
 	}
-/**
- * 直接ログインします。
- * @return
- */
+
+	/**
+	 * 直接ログインします。
+	 * 
+	 * @return
+	 */
 	@GetMapping("/login")
 	public String toLoginPage() {
 		return "administrator/login";
 	}
-
-
 
 	/////////////////////////////////////////////////////
 	// ユースケース：ログアウトをする
