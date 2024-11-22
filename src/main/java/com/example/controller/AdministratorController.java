@@ -152,8 +152,18 @@ public class AdministratorController {
 			System.out.println(4);
 			redirectAttributes.addFlashAttribute("administrator", administrator2);
 
-			return "redirect:/employee/showList";
+			return "redirect:/employee/list";
 		}
+	}
+
+	/**
+	 * 直接ログインします。
+	 * 
+	 * @return
+	 */
+	@GetMapping("/login")
+	public String toLoginPage() {
+		return "administrator/login";
 	}
 
 	/////////////////////////////////////////////////////
