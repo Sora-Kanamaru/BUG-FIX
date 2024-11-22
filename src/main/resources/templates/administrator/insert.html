@@ -60,6 +60,7 @@
                       <label
                         th:errors="*{name}"
                         class="error-messages"
+                        style="color:red"
                       >
                         氏名を入力してください
                       </label>
@@ -71,7 +72,7 @@
                         placeholder="山田太郎"
                         th:field="*{name}"
                         th:errorclass="error-input"
-                        value="山田太郎"
+                        th:value="${name}"
                       />
                     </div>
                   </div>
@@ -84,6 +85,7 @@
                       <label
                         th:errors="*{mailAddress}"
                         class="error-messages"
+                        style="color:red"
                       >
                         メールアドレスを入力してください
                       </label>
@@ -95,7 +97,7 @@
                         placeholder="yamada@mail.com"
                         th:field="*{mailAddress}"
                         th:errorclass="error-input"
-                        value="yamada@mail.com"
+                        th:value="${mailAddress}"
                       />
                     </div>
                   </div>
@@ -108,6 +110,7 @@
                       <label
                         th:errors="*{password}"
                         class="error-messages"
+                        style="color:red"
                       >
                         パスワードを入力してください
                       </label>
@@ -119,7 +122,7 @@
                         placeholder="password"
                         th:field="*{password}"
                         th:errorclass="error-input"
-                        value="xxxxxxxx"
+                        th:value="${password}"
                       />
                     </div>
                   </div>
