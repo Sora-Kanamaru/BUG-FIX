@@ -86,6 +86,7 @@ public class AdministratorController {
 
 		if (result.hasErrors()) {
 			redirectAttributes.addFlashAttribute("administrator", administrator);
+
 			return "administrator/insert";
 		}
 
@@ -95,6 +96,13 @@ public class AdministratorController {
 			model.addAttribute("error", error);
 			return "administrator/insert";
 		}
+
+		if (form.getPassword() != form.getCheckPassword()) {
+			model.addAttribute("passCheck", "確認用パスワードが不正です。");
+
+			return "administrator/insert";
+		}
+
 		administratorService.insert(administrator);
 		return "redirect:/";
 	}

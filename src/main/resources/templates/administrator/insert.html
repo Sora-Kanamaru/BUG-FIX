@@ -127,6 +127,19 @@
                         th:errorclass="error-input"
                         th:value="${password}"
                       />
+                      <span th:if="${passCheck}" th:text="${passCheck}">
+                        メールアドレスまたはパスワードが間違っています
+                      </span><br>
+                      <label for="inputCheckPasswor">確認用パスワード:</label>
+                      <input
+                        type="password"
+                        name="checkPassword"
+                        id="inputCheckPassword"
+                        class="form-control"
+                        placeholder="checkPassword"
+                        th:value="${checkPassword}"
+                        th:field="*{checkPassword}"
+                        />
                     </div>
                   </div>
                 </div>
