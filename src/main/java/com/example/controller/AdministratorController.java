@@ -86,15 +86,25 @@ public class AdministratorController {
 
 		if (result.hasErrors()) {
 			redirectAttributes.addFlashAttribute("administrator", administrator);
+			System.out.println("aaa");
 			return "administrator/insert";
 		}
 
 		if (administratorService.findByMailAddress(administrator.getMailAddress()) != null) {
+			System.out.println("bbb");
 
 			String error = "すでに該当のメールアドレスが存在しています";
 			model.addAttribute("error", error);
 			return "administrator/insert";
 		}
+
+		if (form.getPassword() != form.getCheckPassword()) {
+			model.addAttribute("passCheck", "確認用パスワードが不正です。");
+			System.out.println("ccc");
+
+			return "administrator/insert";
+		}
+
 		administratorService.insert(administrator);
 		return "redirect:/";
 	}
