@@ -105,7 +105,7 @@ public class AdministratorController {
 	 */
 	@RequestMapping("/")
 	public String toLogin() {
-		return "employee/list";
+		return "employee/login";
 	}
 
 	/**
