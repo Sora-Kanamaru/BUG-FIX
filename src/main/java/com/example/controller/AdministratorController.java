@@ -26,7 +26,7 @@ import jakarta.servlet.http.HttpSession;
  *
  */
 @Controller
-@RequestMapping("/")
+@RequestMapping("")
 public class AdministratorController {
 
 	@Autowired
@@ -77,22 +77,20 @@ public class AdministratorController {
 	 * @return ログイン画面へリダイレクト
 	 */
 	@PostMapping("/insert")
-	public String insert(@Validated InsertAdministratorForm form, BindingResult result, Model model) {
-
-		if (form == null) {
-			return "administrator/login";
-		}
+	public String insert(@Validated InsertAdministratorForm form, BindingResult result,
+			RedirectAttributes redirectAttributes) {
 
 		Administrator administrator = new Administrator();
 		// フォームからドメインにプロパティ値をコピー
 		BeanUtils.copyProperties(form, administrator);
+		System.out.println("aaa");
 		if (result.hasErrors()) {
-			model.addAttribute("administrator", administrator);
+			redirectAttributes.addFlashAttribute("administrator", administrator);
 			return "administrator/insert";
 		}
-
+		System.out.println("aaa");
 		administratorService.insert(administrator);
-		return "redirect:administrator/login";
+		return "redirect:/";
 	}
 
 	/////////////////////////////////////////////////////
@@ -105,7 +103,7 @@ public class AdministratorController {
 	 */
 	@RequestMapping("/")
 	public String toLogin() {
-		return "employee/list";
+		return "administrator/login";
 	}
 
 	/**
@@ -142,18 +140,8 @@ public class AdministratorController {
 
 			redirectAttributes.addFlashAttribute("administrator", administrator2);
 
-			return "redirect:/employee/list";
+			return "redirect:/employee/showList";
 		}
-	}
-
-	/**
-	 * 直接ログインします。
-	 * 
-	 * @return
-	 */
-	@GetMapping("/login")
-	public String toLoginPage() {
-		return "administrator/login";
 	}
 
 	/////////////////////////////////////////////////////
