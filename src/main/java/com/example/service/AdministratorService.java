@@ -40,4 +40,9 @@ public class AdministratorService {
 		Administrator administrator = administratorRepository.findByMailAddressAndPassward(mailAddress, password);
 		return administrator;
 	}
+
+    public void findByMailAddressAndPassward(String mailAddress, String password) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findByMailAddressAndPassward'");
+    }
 }

@@ -3,6 +3,9 @@ package com.example.controller;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -68,14 +71,26 @@ public class AdministratorController {
 	/**
 	 * 管理者情報を登録します.
 	 * 
-	 * @param form 管理者情報用フォーム
+	 * @param form   管理者情報用フォーム
+	 * @param result エラー内容格納用フォーム
+	 * @param model  エラー情報を画面へ遷移する
 	 * @return ログイン画面へリダイレクト
 	 */
 	@PostMapping("/insert")
-	public String insert(InsertAdministratorForm form) {
+	public String insert(@Validated InsertAdministratorForm form, BindingResult result, Model model) {
+
+		if (form == null) {
+			return "administrator/login";
+		}
+
 		Administrator administrator = new Administrator();
 		// フォームからドメインにプロパティ値をコピー
 		BeanUtils.copyProperties(form, administrator);
+		if (result.hasErrors()) {
+			model.addAttribute("administrator", administrator);
+			return "administrator/insert";
+		}
+
 		administratorService.insert(administrator);
 		return "administrator/login";
 	}
@@ -88,9 +103,9 @@ public class AdministratorController {
 	 * 
 	 * @return ログイン画面
 	 */
-	@GetMapping("/")
+	@RequestMapping("/")
 	public String toLogin() {
-		return "employee/list";
+		return "administrator/login";
 	}
 
 	/**
@@ -100,13 +115,35 @@ public class AdministratorController {
 	 * @return ログイン後の従業員一覧画面
 	 */
 	@PostMapping("/login")
-	public String login(LoginForm form, RedirectAttributes redirectAttributes) {
+	public String login(@Validated LoginForm form, BindingResult result, RedirectAttributes redirectAttributes,
+			Model model) {
+
 		Administrator administrator = administratorService.login(form.getMailAddress(), form.getPassword());
+
+		Administrator administrator1 = new Administrator();
+		// フォームからドメインにプロパティ値をコピー
+		BeanUtils.copyProperties(form, administrator1);
+
+		if (result.hasErrors()) {
+			model.addAttribute("administrator", administrator1);
+			return "administrator/login";
+		}
+
 		if (administrator == null) {
 			redirectAttributes.addFlashAttribute("errorMessage", "メールアドレスまたはパスワードが不正です。");
-			return "redirect:/";
+			return "administrator/login";
 		}
-		return "redirect:/employee/showList";
+
+		Administrator administrator2 = administratorService.login(form.getMailAddress(), administrator1.getPassword());
+
+		if (administrator2 == null) {
+			return "administrator/login";
+		} else {
+
+			redirectAttributes.addFlashAttribute("administrator", administrator2);
+
+			return "redirect:/employee/showList";
+		}
 	}
 
 	/////////////////////////////////////////////////////
@@ -122,5 +159,4 @@ public class AdministratorController {
 		session.invalidate();
 		return "redirect:/";
 	}
-
 }
