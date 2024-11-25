@@ -78,17 +78,24 @@ public class AdministratorController {
 	 */
 	@PostMapping("/insert")
 	public String insert(@Validated InsertAdministratorForm form, BindingResult result,
-			RedirectAttributes redirectAttributes) {
+			RedirectAttributes redirectAttributes, Model model) {
+		System.out.println("実行はされている");
 
 		Administrator administrator = new Administrator();
 		// フォームからドメインにプロパティ値をコピー
 		BeanUtils.copyProperties(form, administrator);
-		System.out.println("aaa");
+
 		if (result.hasErrors()) {
 			redirectAttributes.addFlashAttribute("administrator", administrator);
 			return "administrator/insert";
 		}
-		System.out.println("aaa");
+
+		if (administratorService.findByMailAddress(administrator.getMailAddress()) != null) {
+			System.out.println("aaasdasda");
+			String error = "すでに該当のメールアドレスが存在しています";
+			model.addAttribute("error", error);
+			return "administrator/insert";
+		}
 		administratorService.insert(administrator);
 		return "redirect:/";
 	}
@@ -124,20 +131,25 @@ public class AdministratorController {
 
 		if (result.hasErrors()) {
 			model.addAttribute("administrator", administrator1);
+			System.out.println(1);
 			return "administrator/login";
 		}
 
 		if (administrator == null) {
 			redirectAttributes.addFlashAttribute("errorMessage", "メールアドレスまたはパスワードが不正です。");
+			System.out.println(2);
+
 			return "administrator/login";
 		}
 
-		Administrator administrator2 = administratorService.login(form.getMailAddress(), administrator1.getPassword());
+		Administrator administrator2 = administratorService.login(form.getMailAddress(), form.getPassword());
 
 		if (administrator2 == null) {
+			System.out.println(3);
+
 			return "administrator/login";
 		} else {
-
+			System.out.println(4);
 			redirectAttributes.addFlashAttribute("administrator", administrator2);
 
 			return "redirect:/employee/showList";
