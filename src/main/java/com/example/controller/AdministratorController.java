@@ -152,7 +152,7 @@ public class AdministratorController {
 			System.out.println(4);
 			redirectAttributes.addFlashAttribute("administrator", administrator2);
 
-			return "redirect:/employ/showList";
+			return "redirect:/employee/showList";
 		}
 	}
 
