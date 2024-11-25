@@ -142,7 +142,7 @@ public class AdministratorController {
 
 			redirectAttributes.addFlashAttribute("administrator", administrator2);
 
-			return "redirect:/employee/list";
+			return "redirect:/employee/showList";
 		}
 	}
 

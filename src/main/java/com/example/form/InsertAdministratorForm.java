@@ -14,6 +14,7 @@ import jakarta.validation.constraints.Size;
 public class InsertAdministratorForm {
 	/** 名前 */
 	@NotBlank(message = "名前が入力されていません")
+	@Size(min = 1, max = 40, message = "名前は40文字以下で入力してください")
 	private String name;
 	@NotBlank(message = "メールアドレスが入力されていません")
 	@Email(message = "メールアドレスが不正です")

@@ -2,8 +2,6 @@ package com.example.domain;
 
 import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 /**
  * 従業員情報を表すドメイン.
  * 
@@ -20,7 +18,6 @@ public class Employee {
 	/** 性別 */
 	private String gender;
 	/** 入社日 */
-	@DateTimeFormat(pattern = "yyyy年MM月dd日")
 	private Date hireDate;
 	/** メールアドレス */
 	private String mailAddress;
@@ -110,12 +107,7 @@ public class Employee {
 	}
 
 	public Date getHireDate() {
-		if(hireDate==null){
-			return "";
-		}
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy年MM月dd日");
-		return sdf.format(hireDate);
-		
+		return hireDate;
 	}
 
 	public void setHireDate(Date hireDate) {
