@@ -146,16 +146,6 @@ public class AdministratorController {
 		}
 	}
 
-	/**
-	 * 直接ログインします。
-	 * 
-	 * @return
-	 */
-	@GetMapping("/login")
-	public String toLoginPage() {
-		return "administrator/login";
-	}
-
 	/////////////////////////////////////////////////////
 	// ユースケース：ログアウトをする
 	/////////////////////////////////////////////////////
@@ -169,5 +159,4 @@ public class AdministratorController {
 		session.invalidate();
 		return "redirect:/";
 	}
-
 }
