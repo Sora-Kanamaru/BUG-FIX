@@ -17,7 +17,7 @@ public class LoginForm {
 	private String mailAddress;
 	/** パスワード */
 	@NotBlank(message = "パスワードが入力されていません")
-	@Size(min = 1, max = 20, message = "パスワードは1文字〜20文字です")
+	@Size(min = 1, max = 20, message = "パスワードは6文字〜20文字です")
 	private String password;
 
 	public String getMailAddress() {
