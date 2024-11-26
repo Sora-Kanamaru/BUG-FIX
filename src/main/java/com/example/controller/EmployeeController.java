@@ -69,6 +69,7 @@ public class EmployeeController {
 	public String showDetail(String id, Model model) {
 		Employee employee = employeeService.showDetail(Integer.parseInt(id));
 		model.addAttribute("employee", employee);
+		System.out.println(employee);
 		return "employee/detail";
 	}
 
@@ -92,4 +93,23 @@ public class EmployeeController {
 		employeeService.update(employee);
 		return "redirect:/employee/showList";
 	}
+
+	@RequestMapping("/search")
+	public String searchByName(String name, Model model) {
+
+		if (name == null) {
+			return showList(model);
+		}
+		List<Employee> employeeList = employeeService.searchByName(name);
+
+		if (employeeList.size() == 0) {
+			model.addAttribute("errorMessage", "1件もありませんでした。");
+			return showList(model);
+		}
+
+		model.addAttribute("employeeList", employeeList);
+		return "employee/list";
+
+	}
+
 }

@@ -86,9 +86,16 @@
       <ol class="breadcrumb">
         <li class="active">
           <a href="list.html" th:href="@{/employee/showList}">従業員リスト</a>
+         
         </li>
       </ol>
 
+
+       
+
+
+
+      
       <!-- table -->
       <div class="row">
         <div
@@ -97,8 +104,18 @@
           <!-- ここから上を編集する必要はありません -->
 
           <!-- ここにモックのtable要素を貼り付けます -->
+          <div class="error-message-search">
+            <div th:if="${errorMessage}" th:text="${errorMessage}"></div><br>
+          <form th:action="@{/employee/search}" method="post">
+            従業員検索：
+            <input type="text" name="name">
+            <button>検索</button>
+          </form>
+        </div>
+
 
           <table class="table table-striped">
+    
             <thead>
               <tr>
                 <th>従業員名</th>
