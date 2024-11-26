@@ -10,6 +10,11 @@
   color: #ff0000;
 }
 
+.error-message-search{
+    display: flex;
+    justify-content: center;
+
+}
 .errors{
   margin: 30px auto;
   height: 30px;
