@@ -21,10 +21,10 @@ public class InsertAdministratorForm {
 	private String mailAddress;
 	/** パスワード */
 	@NotBlank(message = "パスワードが入力されていません")
-	@Size(min = 1, max = 20, message = "パスワードは1文字〜20文字以内にしてください")
+	@Size(min = 6, max = 20, message = "パスワードは6文字〜20文字以内にしてください")
 	private String password;
 
-	@Size(min = 1, max = 20, message = "パスワードは1文字〜20文字です")
+	@Size(min = 6, max = 20, message = "パスワードは6文字〜20文字以内にしてください")
 	private String checkPassword;
 
 	public String getName() {

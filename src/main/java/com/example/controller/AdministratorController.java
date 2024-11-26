@@ -97,7 +97,7 @@ public class AdministratorController {
 			return "administrator/insert";
 		}
 
-		if (form.getPassword() != form.getCheckPassword()) {
+		if (!(form.getPassword().equals(form.getCheckPassword()))) {
 			model.addAttribute("passCheck", "確認用パスワードが不正です。");
 
 			return "administrator/insert";
@@ -132,12 +132,12 @@ public class AdministratorController {
 
 		Administrator administrator = administratorService.login(form.getMailAddress(), form.getPassword());
 
-		Administrator administrator1 = new Administrator();
+		Administrator administratorInput = new Administrator();
 		// フォームからドメインにプロパティ値をコピー
-		BeanUtils.copyProperties(form, administrator1);
+		BeanUtils.copyProperties(form, administratorInput);
 
 		if (result.hasErrors()) {
-			model.addAttribute("administrator", administrator1);
+			model.addAttribute("administrator", administratorInput);
 
 			return "administrator/login";
 		}
@@ -146,16 +146,9 @@ public class AdministratorController {
 			redirectAttributes.addFlashAttribute("errorMessage", "メールアドレスまたはパスワードが不正です。");
 
 			return "administrator/login";
-		}
-
-		Administrator administrator2 = administratorService.login(form.getMailAddress(), form.getPassword());
-
-		if (administrator2 == null) {
-
-			return "administrator/login";
 		} else {
 
-			redirectAttributes.addFlashAttribute("administrator", administrator2);
+			redirectAttributes.addFlashAttribute("administrator", administrator);
 
 			return "redirect:/employee/showList";
 		}

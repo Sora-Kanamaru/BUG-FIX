@@ -19,9 +19,6 @@ public class LoginForm {
 	@NotBlank(message = "パスワードが入力されていません")
 	@Size(min = 1, max = 20, message = "パスワードは1文字〜20文字です")
 	private String password;
-	@NotBlank(message = "確認用パスワードが入力されていません")
-	@Size(min = 1, max = 20, message = "パスワードは1文字〜20文字です")
-	private String checkPassword;
 
 	public String getMailAddress() {
 		return mailAddress;
@@ -39,18 +36,9 @@ public class LoginForm {
 		this.password = password;
 	}
 
-	public String getCheckPassword() {
-		return checkPassword;
-	}
-
-	public void setCheckPassword(String checkPassword) {
-		this.checkPassword = checkPassword;
-	}
-
 	@Override
 	public String toString() {
-		return "LoginForm [mailAddress=" + mailAddress + ", password=" + password + ", checkPassword=" + checkPassword
-				+ "]";
+		return "LoginForm [mailAddress=" + mailAddress + ", password=" + password + "]";
 	}
 
 }
