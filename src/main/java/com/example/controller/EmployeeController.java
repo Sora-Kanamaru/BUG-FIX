@@ -95,6 +95,11 @@ public class EmployeeController {
 
 	@RequestMapping("/search")
 	public String searchByName(String name, Model model) {
+
+		if ("".equals(name)) {
+			model.addAttribute("errorMessage", "1件もありませんでした。");
+		}
+
 		List<Employee> employeeList = employeeService.searchByName(name);
 
 		model.addAttribute("employeeList", employeeList);

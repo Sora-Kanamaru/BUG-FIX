@@ -9,3 +9,8 @@
 .error-messages {
   color: #ff0000;
 }
+
+.error-message-search{
+    display: flex;
+    justify-content: center;
+}
