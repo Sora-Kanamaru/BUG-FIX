@@ -105,7 +105,7 @@
 
           <!-- ここにモックのtable要素を貼り付けます -->
           <div class="error-message-search">
-            <div th:if="${errorMessage}" th:text="${errorMessage}"></div>
+            <div th:if="${errorMessage}" th:text="${errorMessage}"></div><br>
           <form th:action="@{/employee/search}" method="post">
             従業員検索：
             <input type="text" name="name">

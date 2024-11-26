@@ -93,15 +93,12 @@ public class EmployeeRepository {
 	 * @return 曖昧検索した従業員の一覧情報
 	 */
 	public List<Employee> searchByName(String name) {
-		if (name == null) {
-			return findAll();
-		} else {
-			String sql = "SELECT id,name,image,gender,hire_date,mail_address,zip_code,address,telephone,salary,characteristics,dependents_count FROM employees WHERE name LIKE :name order by hire_date desc";
 
-			SqlParameterSource param = new MapSqlParameterSource().addValue("name", "%" + name + "%");
+		String sql = "SELECT id,name,image,gender,hire_date,mail_address,zip_code,address,telephone,salary,characteristics,dependents_count FROM employees WHERE name LIKE :name order by hire_date desc";
 
-			return template.query(sql, param, EMPLOYEE_ROW_MAPPER);
-		}
+		SqlParameterSource param = new MapSqlParameterSource().addValue("name", "%" + name + "%");
+
+		return template.query(sql, param, EMPLOYEE_ROW_MAPPER);
 
 	}
 
