@@ -147,8 +147,7 @@ public class AdministratorController {
 
 			return "administrator/login";
 		} else {
-
-			redirectAttributes.addFlashAttribute("administrator", administrator);
+			session.setAttribute("administrator", administrator);
 
 			return "redirect:/employee/showList";
 		}
