@@ -127,9 +127,9 @@
                         th:errorclass="error-input"
                         th:value="${password}"
                       />
-                      <span th:if="${passCheck}" th:text="${passCheck}">
+                      <b><span th:if="${passCheck}" th:text="${passCheck}" style="color:red">
                         メールアドレスまたはパスワードが間違っています
-                      </span><br>
+                      </span></b><br>
                       <label for="inputCheckPasswor">確認用パスワード:</label>
                       <input
                         type="password"

@@ -80,15 +80,15 @@ public class AdministratorController {
 	public String insert(@Validated InsertAdministratorForm form, BindingResult result,
 			RedirectAttributes redirectAttributes, Model model) {
 
-		Administrator administrator = new Administrator();
-		// フォームからドメインにプロパティ値をコピー
-		BeanUtils.copyProperties(form, administrator);
-
 		if (result.hasErrors()) {
-			redirectAttributes.addFlashAttribute("administrator", administrator);
+			redirectAttributes.addFlashAttribute("administrator", form);
 
 			return "administrator/insert";
 		}
+
+		Administrator administrator = new Administrator();
+		// フォームからドメインにプロパティ値をコピー
+		BeanUtils.copyProperties(form, administrator);
 
 		if (administratorService.findByMailAddress(administrator.getMailAddress()) != null) {
 
