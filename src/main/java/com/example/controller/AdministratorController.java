@@ -80,14 +80,15 @@ public class AdministratorController {
 	public String insert(@Validated InsertAdministratorForm form, BindingResult result,
 			RedirectAttributes redirectAttributes, Model model) {
 
+		if (result.hasErrors()) {
+			redirectAttributes.addFlashAttribute("administrator", form);
+
+			return "administrator/insert";
+		}
+
 		Administrator administrator = new Administrator();
 		// フォームからドメインにプロパティ値をコピー
 		BeanUtils.copyProperties(form, administrator);
-
-		if (result.hasErrors()) {
-			redirectAttributes.addFlashAttribute("administrator", administrator);
-			return "administrator/insert";
-		}
 
 		if (administratorService.findByMailAddress(administrator.getMailAddress()) != null) {
 
@@ -95,6 +96,13 @@ public class AdministratorController {
 			model.addAttribute("error", error);
 			return "administrator/insert";
 		}
+
+		if (!(form.getPassword().equals(form.getCheckPassword()))) {
+			model.addAttribute("passCheck", "確認用パスワードが不正です。");
+
+			return "administrator/insert";
+		}
+
 		administratorService.insert(administrator);
 		return "redirect:/";
 	}
@@ -124,12 +132,12 @@ public class AdministratorController {
 
 		Administrator administrator = administratorService.login(form.getMailAddress(), form.getPassword());
 
-		Administrator administrator1 = new Administrator();
+		Administrator administratorInput = new Administrator();
 		// フォームからドメインにプロパティ値をコピー
-		BeanUtils.copyProperties(form, administrator1);
+		BeanUtils.copyProperties(form, administratorInput);
 
 		if (result.hasErrors()) {
-			model.addAttribute("administrator", administrator1);
+			model.addAttribute("administrator", administratorInput);
 
 			return "administrator/login";
 		}
@@ -138,16 +146,8 @@ public class AdministratorController {
 			redirectAttributes.addFlashAttribute("errorMessage", "メールアドレスまたはパスワードが不正です。");
 
 			return "administrator/login";
-		}
-
-		Administrator administrator2 = administratorService.login(form.getMailAddress(), form.getPassword());
-
-		if (administrator2 == null) {
-
-			return "administrator/login";
 		} else {
-
-			redirectAttributes.addFlashAttribute("administrator", administrator2);
+			session.setAttribute("administrator", administrator);
 
 			return "redirect:/employee/showList";
 		}
