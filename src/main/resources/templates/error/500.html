@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メンテナンス中</title>
+    <link
+    rel="stylesheet"
+    href="../../static/css/bootstrap.css"
+    th:href="@{/css/bootstrap.css}"
+  />
+  <link
+    rel="stylesheet"
+    href="../../static/css/style.css"
+    th:href="@{/css/style.css}"
+  />
+</head>
+<body>
+
+
+
+    <div class="errors">
+    <h2>メンテナンス中</h2>
+    <p>メンテナンス終了までしばらくお待ちください</p>
+
+    <p>時間が経ちましたら下記リンクから再度ログインしてください</p>
+    <a th:href="@{/}">ログインページ</a>
+</div>
+    
+</body>
+</html>

@@ -2512,6 +2512,7 @@ textarea.form-group-sm .form-control,
 select[multiple].input-sm,
 select[multiple].form-group-sm .form-control {
   height: auto;
+
 }
 .input-lg,
 .form-group-lg .form-control {
@@ -2664,6 +2665,7 @@ select[multiple].form-group-lg .form-control {
 }
 @media (min-width: 768px) {
   .form-inline .form-group {
+    
     display: inline-block;
     margin-bottom: 0;
     vertical-align: middle;

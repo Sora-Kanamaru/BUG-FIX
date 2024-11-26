@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ページが見つかりません</title>
+    <link
+    rel="stylesheet"
+    href="../../static/css/bootstrap.css"
+    th:href="@{/css/bootstrap.css}"
+  />
+  <link
+    rel="stylesheet"
+    href="../../static/css/style.css"
+    th:href="@{/css/style.css}"
+  />
+</head>
+<body>
+    
+      
+<div class="errors">
+    <div>ページが見つかりません</div>
+    <p>URLが正しいかご確認ください</p>
+
+    <p>時間が経ちましたら下記リンクから再度ログインしてください</p>
+    <a th:href="@{/}">ログインページ</a>
+</div>
+
+</body>
+</html>

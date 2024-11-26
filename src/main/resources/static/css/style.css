@@ -13,4 +13,15 @@
 .error-message-search{
     display: flex;
     justify-content: center;
+
+}
+.errors{
+  margin: 30px auto;
+  height: 30px;
+  padding: 5px 10px;
+  font-size: 25px;
+  line-height: 1.5;
+  border-radius: 3px;
+  margin-bottom: 0;
+  text-align: center;
 }
